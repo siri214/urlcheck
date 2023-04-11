@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link rel="stylessheet" href="index.css"> -->
+    </head>
+    <body>
+        <script>
+            function ViewLayer(){
+                document.getElementById("loading_bar").style.display='inline';
+            }
+        </script>
+
+
+        <div id="loading_bar" style='position:absolute; display:none; z-index:9999'>
+            <img src="https://www.gjstec.or.kr/img/loading.gif" id="loading_icon">
+            <div id="loading">loading...</div>
+        </div>
+        
+    
+        <fieldset>
+            <form action="{% url 'urlChecking:checkPro' %}" method="POST">
+                {% csrf_token %}
+                <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" id="search_btn">
+                <input type="search" placeholder="url 입력" name="url">
+                <button type="submit" style="cursor:hand;" onclick="javascript:ViewLayer();">
+                    <i class="fa fa-search" > 
+                        검색
+                    </i>
+                </button>
+            </form>
+        </fieldset>
+    
+    </body>
+
+    <style>
+        * {
+            background-color: #333;
+        }
+        body {
+            width: 300px;
+            margin: 0 auto;
+            padding-top: 15rem;
+        }
+        fieldset {
+            position: relative;
+            display: inline-block;
+            padding: 0 0 0 20px;
+            background: #fff;
+            border: none;
+            border-radius: 5px;
+            width:300px;
+        }
+        #search_btn { /*돋보기 아이콘*/
+            position : absolute;
+            width: 20px;
+            top: 15px;
+            right: 15px;
+            margin: 0;
+        }
+        input,button {
+            position: relative;
+            width: 200px;
+            height: 50px;
+            padding: 0;
+            display: inline-block;
+            float: left;
+        }
+
+        input {
+            width: 250px;
+            color: rgb(58, 58, 58);
+            border: 0 none;
+            z-index: 2; /*버튼 가려주는*/
+
+        }
+
+        input:focus {
+            outline: 0 none;
+        }
+
+
+        input:focus + button {
+            -webkit-transform: translate(0, 0);
+                -ms-transform: translate(0, 0);
+                    transform: translate(0, 0);
+                -webkit-transition-duration: 0.3s;
+                        transition-duration: 0.3s;
+        }
+
+
+    
+        button { /*검색버튼*/
+            z-index: 1;
+            width: 50px;
+            border: 0 none;
+            background: #b6c253;
+            cursor: pointer;
+            color:#fff;
+            border-radius: 0 5px 5px 0;  
+            -webkit-transform: translate(-50px, 0);
+                -ms-transform: translate(-50px, 0);
+                    transform: translate(-50px, 0);
+            -webkit-transition-duration: 0.3s;
+                    transition-duration: 0.3s;
+            }
+
+
+        #loading{ /*loading 글씨*/
+            position: relative;
+            left: 130px;
+            bottom: 70px;
+            color: rgb(255, 255, 255);
+        }
+ 
+        #loading_icon{ /*loading 아이콘*/
+            position: relative;
+            width: 27px;
+            height:27px;
+
+            left: 83px;
+            bottom: 4;
+        }
+    </style>
+
+</html>
